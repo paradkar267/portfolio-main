@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   THEME TOKENS — warm cream / espresso / burnt-rust
+   ============================================================ */
+:root {
+  --bg: #f3eee4;
+  --bg-soft: #eae3d4;
+  --surface: #faf7ef;
+  --surface-2: #efe9db;
+  --ink: #221a10;
+  --ink-soft: #55493a;
+  --muted: #8b7f6d;
+  --line: rgba(34, 26, 16, 0.14);
+  --line-strong: rgba(34, 26, 16, 0.28);
+  --accent: #d94e1f;
+  --accent-deep: #b23e15;
+  --accent-soft: rgba(217, 78, 31, 0.12);
+  --accent-ink: #fbf7ef;
+  --gold: #b98a2f;
+  --grain-op: 0.5;
+  --shadow: 0 30px 60px -25px rgba(34, 26, 16, 0.35);
+  --nav-bg: rgba(243, 238, 228, 0.94);
+}
+
+.dark {
+  --bg: #000000;
+  --bg-soft: #060606;
+  --surface: #0c0c0c;
+  --surface-2: #151515;
+  --ink: #f2ede4;
+  --ink-soft: #c4bdb1;
+  --muted: #8c8578;
+  --line: rgba(242, 237, 228, 0.13);
+  --line-strong: rgba(242, 237, 228, 0.3);
+  --accent: #f2602c;
+  --accent-deep: #ff7d4d;
+  --accent-soft: rgba(242, 96, 44, 0.16);
+  --accent-ink: #000000;
+  --gold: #d9ab4c;
+  --grain-op: 0.32;
+  --shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.9);
+  --nav-bg: rgba(0, 0, 0, 0.92);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-linestrong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accentdeep: var(--accent-deep);
+  --color-accentsoft: var(--accent-soft);
+  --color-accentink: var(--accent-ink);
+  --color-gold: var(--gold);
+
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* fallback scroll offset so anchored sections never hide under the
+     fixed navbar (native scrollIntoView / hash navigation) */
+  section[id] {
+    scroll-margin-top: 84px;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* instant, reliable taps on touch devices */
+  a,
+  button,
+  input,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  /* iOS Safari zooms into inputs under 16px — neutralised per-field in JSX,
+     but keep placeholders legible here too */
+  input::placeholder,
+  textarea::placeholder {
+    opacity: 0.7;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 8px;
+    border: 2px solid var(--bg);
+  }
+}
+
+/* Theme cross-fade fallback — applied only for ~450ms while toggling,
+   so the universal selector never costs anything during scroll. Used when
+   the View Transitions API (circular reveal, below) isn't available. */
+html.theming,
+html.theming * {
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease,
+    fill 0.4s ease,
+    stroke 0.4s ease !important;
+}
+
+/* ============================================================
+   THEME TOGGLE — circular reveal via the View Transitions API
+   ============================================================ */
+::view-transition-group(root) {
+  animation-duration: 620ms;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  /* the circle(...) clip-path keyframes are driven from JS (useTheme.tsx)
+     so the reveal always originates exactly at the toggle button */
+  animation: none;
+  z-index: 2147483646;
+}
+
+/* ============================================================
+   TYPE HELPERS
+   ============================================================ */
+.font-xwide {
+  font-variation-settings: "wdth" 125, "opsz" auto;
+}
+.font-wide {
+  font-variation-settings: "wdth" 108;
+}
+.font-narrow {
+  font-variation-settings: "wdth" 76;
+}
+.serif-it {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-variation-settings: "opsz" 100;
+}
+
+/* rounded geometric sans — hero statement headline */
+.font-headline {
+  font-family: "Poppins", "Archivo", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* brush-script signature */
+.font-script {
+  font-family: "Pacifico", "Fraunces", cursive;
+}
+
+.txt-outline {
+  -webkit-text-stroke: 1.5px var(--ink);
+  color: transparent;
+}
+.txt-outline-faint {
+  -webkit-text-stroke: 1px var(--line-strong);
+  color: transparent;
+}
+.txt-outline-accent {
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+}
+
+/* ============================================================
+   GRAIN + TEXTURES
+   ============================================================ */
+.grain {
+  position: fixed;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  pointer-events: none;
+  z-index: 90;
+  opacity: var(--grain-op);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  contain: layout paint style;
+  animation: grain-shift 8s steps(4) infinite;
+}
+@keyframes grain-shift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-1.5%, 1%, 0); }
+  50% { transform: translate3d(1%, -1.5%, 0); }
+  75% { transform: translate3d(-1%, -1%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .spin-slow,
+  .float-y,
+  .marquee-track,
+  .scroll-cue-line::after,
+  .pulse-dot::before {
+    animation: none !important;
+  }
+}
+
+.dot-grid {
+  background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* hides the scrollbar on the horizontally-scrollable mobile filter bar */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+   KEYFRAMES / LOOPS
+   ============================================================ */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-x var(--marquee-dur, 28s) linear infinite;
+  will-change: transform;
+}
+.marquee-rev {
+  animation-direction: reverse;
+}
+.marquee-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.float-y {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.7); opacity: 0.5; }
+}
+.pulse-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: currentColor;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  55% { transform: translateY(100%); }
+  100% { transform: translateY(100%); }
+}
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  animation: scroll-cue 1.9s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+/* link underline sweep */
+.u-sweep {
+  position: relative;
+}
+.u-sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1.5px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.u-sweep:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* rolling hover label */
+.roll {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.roll > span {
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.roll > span:last-child {
+  position: absolute;
+  inset: 0;
+  transform: translateY(105%);
+}
+.roll:hover > span:first-child {
+  transform: translateY(-105%);
+}
+.roll:hover > span:last-child {
+  transform: translateY(0);
+}
+
+/* card sheen sweep */
+.sheen {
+  position: relative;
+  overflow: hidden;
+}
+.sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 48%,
+    rgba(255, 255, 255, 0.05) 54%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.9s cubic-bezier(0.6, 0, 0.2, 1);
+  pointer-events: none;
+}
+.sheen:hover::before {
+  transform: translateX(120%);
+}
+
+/* clip helper for line reveals */
+.mask-line {
+  display: block;
+  overflow: hidden;
+}
+
+@media (pointer: coarse) {
+  .cursor-el {
+    display: none !important;
+  }
+}
