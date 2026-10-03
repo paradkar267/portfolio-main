@@ -263,8 +263,8 @@ export const PROJECTS: Project[] = [
 
 export const SOCIALS = [
   { label: "GitHub", href: "https://github.com/paradkar267" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Instagram", href: "https://instagram.com" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/yash-paradkar001" },
+  { label: "Instagram", href: "https://www.instagram.com/yash_paradkar68/" },
   { label: "Email", href: "mailto:yashparadkar63@gmail.com" },
 ];
 
@@ -277,4 +277,4 @@ export const HERO_SKILLS = [
   { label: "Applied AI", stack: "Gemini Flash · RAG · LangChain" },
 ];
 
-export const EMAIL = "yashparadkar4@gmail.com";
+export const EMAIL = "yashparadkar63@gmail.com";
