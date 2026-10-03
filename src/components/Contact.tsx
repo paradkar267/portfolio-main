@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUp, ArrowUpRight, Check, Copy, MapPin, Send } from "lucide-react";
+import { AlertCircle, ArrowUp, ArrowUpRight, Check, Copy, Loader2, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { EMAIL, SOCIALS } from "../data/content";
 import { LineReveal, Magnetic, Reveal, SectionTag } from "./fx";
@@ -55,7 +55,8 @@ function Field({
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "needs_activation" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const copyEmail = async () => {
     try {
@@ -67,11 +68,57 @@ export default function Contact() {
     }
   };
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3200);
-    (e.target as HTMLFormElement).reset();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+
+    if (!name || !email || !message) return;
+
+    setStatus("sending");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Portfolio Message from ${name} (${email})`,
+          _captcha: "false",
+          _template: "table",
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (res.ok && (data?.success === "true" || data?.success === true)) {
+        setStatus("sent");
+        form.reset();
+        setTimeout(() => setStatus("idle"), 5000);
+      } else if (
+        data?.message &&
+        typeof data.message === "string" &&
+        data.message.toLowerCase().includes("activation")
+      ) {
+        setStatus("needs_activation");
+        form.reset();
+      } else {
+        setStatus("error");
+        setErrorMessage(data?.message || "Could not send. Please email directly.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage("Network error. Please try again or email directly.");
+    }
   };
 
   return (
@@ -203,15 +250,49 @@ export default function Contact() {
                 textarea
                 placeholder="Timeline – scope – the exciting part…"
               />
+              {status === "needs_activation" && (
+                <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-xs text-amber-200">
+                  <p className="font-semibold text-amber-100 flex items-center gap-1.5">
+                    <AlertCircle size={15} className="text-amber-400" /> One-Time Activation Required
+                  </p>
+                  <p className="mt-1 text-amber-200/90 leading-relaxed">
+                    FormSubmit has sent a 1-click confirmation email to <strong>{EMAIL}</strong>. Please open your Gmail and click <em>"Activate Form"</em> once to receive all submissions.
+                  </p>
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-4 text-xs text-rose-200 flex items-start gap-2.5">
+                  <AlertCircle size={16} className="mt-0.5 shrink-0 text-rose-400" />
+                  <div>
+                    <p className="font-semibold text-rose-100">Could not send</p>
+                    <p className="mt-0.5 text-rose-200/90">{errorMessage}</p>
+                    <a
+                      href={`mailto:${EMAIL}?subject=Portfolio%20Inquiry`}
+                      className="mt-2 inline-flex items-center gap-1.5 font-bold text-accent underline underline-offset-4 hover:text-ink"
+                    >
+                      Click here to email directly <ArrowUpRight size={13} />
+                    </a>
+                  </div>
+                </div>
+              )}
+
               <Magnetic className="w-full" strength={0.15}>
                 <button
                   type="submit"
                   data-hover
-                  className={`flex w-full items-center justify-center gap-3 rounded-full py-4.5 text-[12px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
-                    sent ? "bg-emerald-600 text-white" : "bg-ink text-bg hover:bg-accent hover:text-accent-ink"
+                  disabled={status === "sending"}
+                  className={`flex w-full items-center justify-center gap-3 rounded-full py-4.5 text-[12px] font-bold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed ${
+                    status === "sent"
+                      ? "bg-emerald-600 text-white"
+                      : "bg-ink text-bg hover:bg-accent hover:text-accent-ink"
                   }`}
                 >
-                  {sent ? (
+                  {status === "sending" ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" /> Sending Message...
+                    </>
+                  ) : status === "sent" ? (
                     <>
                       <Check size={16} /> Message sent — thank you
                     </>
