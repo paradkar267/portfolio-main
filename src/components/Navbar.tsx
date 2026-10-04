@@ -46,6 +46,17 @@ export default function Navbar() {
           }`}
           style={scrolled ? { background: "var(--nav-bg)" } : undefined}
         >
+          {/* Mobile Resume CTA - Left side */}
+          <div className="flex items-center lg:hidden">
+            <button
+              onClick={() => setResumeOpen(true)}
+              data-hover
+              className="group flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-bg transition-colors duration-300 hover:bg-accent hover:text-accent-ink"
+            >
+              <FileText size={13} />
+              Resume
+            </button>
+          </div>
 
           {/* Desktop links - centered in navbar */}
           <nav className="hidden items-center gap-9 lg:flex lg:absolute lg:left-1/2 lg:-translate-x-1/2">
@@ -62,7 +73,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-2.5 sm:gap-3">
             {/* Theme toggle */}
             <Magnetic strength={0.3}>
               <button
@@ -90,17 +101,19 @@ export default function Navbar() {
               </button>
             </Magnetic>
 
-            {/* Resume CTA */}
-            <Magnetic strength={0.25}>
-              <button
-                onClick={() => setResumeOpen(true)}
-                data-hover
-                className="group flex items-center gap-2 overflow-hidden rounded-full bg-ink px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-bg transition-colors duration-300 hover:bg-accent hover:text-accent-ink"
-              >
-                <FileText size={14} />
-                Resume
-              </button>
-            </Magnetic>
+            {/* Desktop Resume CTA */}
+            <div className="hidden lg:block">
+              <Magnetic strength={0.25}>
+                <button
+                  onClick={() => setResumeOpen(true)}
+                  data-hover
+                  className="group flex items-center gap-2 overflow-hidden rounded-full bg-ink px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-bg transition-colors duration-300 hover:bg-accent hover:text-accent-ink"
+                >
+                  <FileText size={14} />
+                  Resume
+                </button>
+              </Magnetic>
+            </div>
 
             {/* Mobile burger */}
             <button

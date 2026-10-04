@@ -174,7 +174,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Architected on Next.js with React Server Components for near-instant rendering. PostgreSQL manages template catalog metadata, analytics, and license validation. Dynamic iframe isolation ensures safe, responsive preview rendering of live templates.",
     stack: ["Next.js", "React", "PostgreSQL", "Tailwind CSS", "Framer Motion", "Vercel"],
-    image: "/images/project-bttemplates.jpg",
+    image: "/images/bttemplate.png",
     live: "https://bt-templates.vercel.app",
   },
   {
@@ -197,7 +197,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Next.js SSR storefront connected to a Node.js/Express backend and MongoDB cluster. Images are optimized via modern WebP delivery pipelines. Secure payment session handling implemented with Razorpay API and verified signature webhooks.",
     stack: ["Next.js", "Node.js", "Express", "MongoDB", "Razorpay", "Tailwind CSS"],
-    image: "/images/project-rajwadi.jpg",
+    image: "/images/rajwadi.png",
     live: "https://www.rajwadirajputiposhak.com",
   },
   {
@@ -220,7 +220,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "React frontend with Tailwind CSS and responsive design patterns. RESTful API powered by Node.js and Express connected to MongoDB for property schema and user analytics. Map interfaces integrated using Google Maps JavaScript API.",
     stack: ["React", "Node.js", "Express", "MongoDB", "Google Maps API", "Tailwind CSS"],
-    image: "/images/project-heyinvestor.jpg",
+    image: "/images/heyinvester.png",
     live: "https://www.heyinvestor.in",
   },
   {
@@ -243,7 +243,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Static site generation with Next.js and TypeScript, styled with Tailwind CSS. Optimized for strict web vitals and fast delivery across continents via CDN edge caching with comprehensive schema.org metadata for international search engines.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "SEO Best Practices"],
-    image: "/images/project-pankaj.jpg",
+    image: "/images/pankaj.png",
     live: "https://www.pankajoverseasexports.com",
   },
   {
@@ -266,7 +266,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Built with React and Three.js / React Three Fiber using custom shaders and lightweight glTF 3D assets. Camera motions and page narrative sections are driven by GSAP ScrollTrigger for 60fps smooth hardware-accelerated animations.",
     stack: ["Three.js", "React", "GSAP ScrollTrigger", "WebGL", "Vite", "Tailwind CSS"],
-    image: "/images/project-logistics.jpg",
+    image: "/images/newindia.png",
     live: "https://newindia-3d.vercel.app",
   },
 ];

@@ -16,7 +16,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { PROJECTS, type Project } from "../data/content";
 import { scrollTo } from "../lib/scroll";
 import { EASE, LineReveal, Reveal, SectionTag } from "./fx";
-import DropImage from "./DropImage";
 
 /* ---------------------------------------------------------------- */
 /* Project Card                                                      */
@@ -40,19 +39,16 @@ function ProjectCard({
       onClick={() => onOpen(project)}
       className="bg-anim group relative flex cursor-pointer flex-col overflow-hidden rounded-[22px] border border-line bg-surface transition-[transform,border-color,box-shadow] duration-500 hover:-translate-y-1.5 hover:border-line-strong hover:shadow-[var(--shadow)]"
     >
-      <div className={`relative overflow-hidden bg-surface2 aspect-[16/10]`}>
-        <DropImage slot={project.id} src={project.image} alt={project.title} />
+      <div className="relative overflow-hidden bg-surface2 aspect-[16/10]">
+        <img
+          src={project.image}
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-75 transition-opacity duration-500 group-hover:opacity-90" />
 
-        {/* chips */}
-        <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-2">
-          <span className="rounded-full bg-black/60 px-3 py-1.5 font-mono text-[9.5px] uppercase tracking-[0.16em] text-white backdrop-blur-md">
-            {project.category}
-          </span>
-          <span className="rounded-full bg-black/60 px-3 py-1.5 font-mono text-[9.5px] tabular-nums tracking-[0.16em] text-white backdrop-blur-md">
-            {project.year}
-          </span>
-        </div>
 
         {/* hover action */}
         <div className="absolute bottom-4 right-4 grid h-11 w-11 translate-y-3 place-items-center rounded-full bg-accent text-accent-ink opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 shadow-lg">
@@ -89,12 +85,28 @@ function ProjectCard({
           )}
         </div>
 
-        <div className="mt-5 flex items-center justify-between gap-3 border-t border-line pt-3.5">
-          <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-ink2 transition-colors group-hover:text-accent">
-            View case study
-            <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </span>
-          <div className="flex items-center gap-3">
+        {/* Action Row */}
+        <div className="mt-5 border-t border-line pt-4 flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`Visit ${project.title} live website`}
+                className="group/live flex-1 sm:flex-initial flex items-center justify-center gap-2 rounded-xl sm:rounded-full bg-accent px-4 py-2.5 sm:py-1.5 font-mono text-[11.5px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-accent-ink shadow-sm transition-all duration-300 hover:bg-accent-deep hover:shadow-[0_0_18px_rgba(242,96,44,0.4)] active:scale-[0.98] sm:hover:scale-105"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+                </span>
+                <Globe size={13} className="transition-transform duration-300 group-hover/live:rotate-12" />
+                <span>Live Website</span>
+                <ArrowUpRight size={13} className="transition-transform duration-300 group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5" />
+              </a>
+            )}
+
             {project.github && (
               <a
                 href={project.github}
@@ -102,26 +114,24 @@ function ProjectCard({
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 aria-label={`View ${project.title} source code on GitHub`}
-                className="flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-accent"
+                className="flex items-center justify-center gap-1.5 rounded-xl sm:rounded-full border border-line-strong bg-surface2 px-3 py-2.5 sm:py-1.5 font-mono text-[11px] sm:text-[10px] uppercase tracking-[0.12em] text-ink transition-colors hover:border-ink hover:text-ink active:scale-[0.98]"
               >
-                <Code2 size={11} />
-                Code
+                <Code2 size={13} />
+                <span>Code</span>
               </a>
             )}
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                aria-label={`Visit ${project.title} live deployment`}
-                className="flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-accent"
-              >
-                <Globe size={11} />
-                Live
-                <ArrowUpRight size={11} />
-              </a>
-            )}
+
+            {/* Desktop Case study hint */}
+            <span className="hidden sm:inline-flex ml-auto items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-muted transition-colors group-hover:text-ink">
+              Details
+              <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </div>
+
+          {/* Mobile Case study hint */}
+          <div className="sm:hidden flex items-center justify-between font-mono text-[10.5px] text-muted pt-1">
+            <span className="uppercase tracking-[0.14em]">Tap card for case study</span>
+            <ArrowRight size={12} className="text-accent" />
           </div>
         </div>
       </div>
@@ -199,7 +209,11 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       >
         <div className="relative">
           <div className="aspect-[16/9] w-full overflow-hidden bg-surface2 max-h-[360px]">
-            <DropImage slot={`modal-${project.id}`} src={project.image} alt={project.title} />
+            <img
+              src={project.image}
+              alt={project.title}
+              className="h-full w-full object-cover"
+            />
           </div>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
           <button
