@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PROJECTS, type Project } from "../data/content";
+import { scrollTo } from "../lib/scroll";
 import { EASE, LineReveal, Reveal, SectionTag } from "./fx";
 import DropImage from "./DropImage";
 
@@ -411,7 +412,7 @@ function FilterBar({
 /* ---------------------------------------------------------------- */
 /* Section                                                           */
 /* ---------------------------------------------------------------- */
-const INITIAL_COUNT = 6;
+const INITIAL_COUNT = 3;
 
 export default function Work() {
   const [active, setActive] = useState<Project | null>(null);
@@ -440,6 +441,15 @@ export default function Work() {
   const handleFilter = (c: string) => {
     setFilter(c);
     setShowAll(false);
+  };
+
+  const toggleShowAll = () => {
+    if (showAll) {
+      setShowAll(false);
+      scrollTo("#work");
+    } else {
+      setShowAll(true);
+    }
   };
 
   return (
@@ -515,7 +525,7 @@ export default function Work() {
         {filtered.length > INITIAL_COUNT && (
           <Reveal delay={0.1} className="mt-10 flex justify-center">
             <button
-              onClick={() => setShowAll((v) => !v)}
+              onClick={toggleShowAll}
               data-hover
               className="group flex items-center gap-3 rounded-full border border-line-strong px-7 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
             >

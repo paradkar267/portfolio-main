@@ -8,6 +8,7 @@ export const NAV_LINKS = [
 export const HERO_MARQUEE = [
   "Full-Stack Engineering",
   "Applied AI & RAG",
+  "Machine & Deep Learning",
   "Next.js / React",
   "Type-Safe Code",
   "Product Thinking",
@@ -18,7 +19,7 @@ export const STATS = [
   { value: 8.66, decimals: 2, suffix: "", label: "CGPA — Distinction", sub: "GH Raisoni University · CE" },
   { value: 5, decimals: 0, suffix: "+", label: "Products Shipped Live", sub: "Full-Stack & Client Work" },
   { value: 6, decimals: 0, suffix: "mo", label: "Industry Internship", sub: "Bizleap Technologies" },
-  { value: 15, decimals: 0, suffix: "+", label: "Technologies Mastered", sub: "Frontend · Backend · AI" },
+  { value: 25, decimals: 0, suffix: "+", label: "Technologies Mastered", sub: "Frontend · Backend · ML/AI" },
 ];
 
 export const SKILL_GROUPS = [
@@ -50,9 +51,17 @@ export const SKILL_GROUPS = [
   },
   {
     id: "03",
-    title: "AI & Retrieval",
-    blurb: "Grounded, production-grade AI features.",
+    title: "AI, ML & Deep Learning",
+    blurb: "Predictive modeling, neural architectures & RAG.",
     skills: [
+      { name: "TensorFlow" },
+      { name: "Keras" },
+      { name: "scikit-learn" },
+      { name: "Neural Networks" },
+      { name: "Transfer Learning" },
+      { name: "Random Forest" },
+      { name: "Gradient Boosting" },
+      { name: "Classification" },
       { name: "Gemini Flash" },
       { name: "RAG Pipelines" },
       { name: "LangChain" },
@@ -67,6 +76,7 @@ export const SKILL_GROUPS = [
     blurb: "Shipping discipline, every single day.",
     skills: [
       { name: "Git" },
+      { name: "GitHub" },
       { name: "Vercel" },
       { name: "Postman" },
       { name: "Linux / Bash" },
@@ -274,7 +284,7 @@ export const SOCIAL_HANDLE = "@paradkar267";
 export const HERO_SKILLS = [
   { label: "Frontend Engineering", stack: "React · Next.js · TypeScript" },
   { label: "Backend & APIs", stack: "Node.js · Express · PostgreSQL" },
-  { label: "Applied AI", stack: "Gemini Flash · RAG · LangChain" },
+  { label: "AI & Machine Learning", stack: "Gemini Flash · scikit-learn · TensorFlow" },
 ];
 
 export const EMAIL = "yashparadkar63@gmail.com";

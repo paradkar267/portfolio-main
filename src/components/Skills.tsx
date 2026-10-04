@@ -50,14 +50,13 @@ export default function Skills() {
             </h2>
           </div>
 
-          {/* compact meta row — quiet, not loud */}
           <Reveal
             delay={0.12}
             className="flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted"
           >
             <span className="flex items-baseline gap-2">
               <span className="font-xwide text-2xl font-bold leading-none text-accent">
-                15+
+                25+
               </span>
               technologies
             </span>

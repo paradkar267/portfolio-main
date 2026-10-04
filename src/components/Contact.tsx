@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { AlertCircle, ArrowUp, ArrowUpRight, Check, Copy, Loader2, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { EMAIL, SOCIALS } from "../data/content";
+import DottedName from "./DottedName";
 import { LineReveal, Magnetic, Reveal, SectionTag } from "./fx";
 import Marquee from "./Marquee";
 
@@ -306,16 +307,19 @@ export default function Contact() {
             </div>
           </motion.form>
         </div>
+
+        {/* ============== DOTTED NAME BANNER ============== */}
+        <DottedName />
       </div>
 
       {/* ============== FOOTER ============== */}
       <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-4 px-5 py-7 sm:px-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted">
+        <div className="mx-auto flex max-w-[1600px] flex-col sm:flex-row items-center justify-between gap-4 px-5 py-7 sm:px-8 text-center sm:text-left">
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">
             © 2026 Yash Paradkar — All rights reserved
           </p>
-          <p className="hidden font-mono text-[10px] uppercase tracking-[0.24em] text-muted md:block">
-            Designed & engineered with intent
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-muted">
+            Designed &amp; Developed by <span className="font-semibold text-ink">Yash Paradkar</span>
           </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

@@ -174,6 +174,95 @@ export default function BrandIcon({ name, className = "h-4 w-4" }: { name: strin
         <circle cx="15" cy="12" r="3" fill="#1ABCFE" />
       </svg>
     );
+  if (key.includes("github"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+        <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+      </svg>
+    );
+  if (key.includes("tensorflow") || key.includes("tf"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} aria-hidden>
+        <path d="M2.5 7.2 11.5 2v18l-3.6-2.1v-6.5l-3.6 2.1V7.2z" fill="#FF6F00" />
+        <path d="M12.5 2l9 5.2v6.4l-3.6-2.1v6.5l-3.6 2.1V2z" fill="#FFA000" />
+      </svg>
+    );
+  if (key.includes("keras"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} aria-hidden>
+        <rect width="24" height="24" rx="5" fill="#D00000" />
+        <path d="M6 5.5h3.2v5.3l5.2-5.3h4.2l-5.8 5.9 6.2 7.1h-4.3l-4.5-5.3v5.3H6V5.5z" fill="#fff" />
+      </svg>
+    );
+  if (key.includes("scikit") || key.includes("sklearn"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} aria-hidden>
+        <path d="M12 3a9 9 0 0 0-9 9c0 4.2 2.9 7.7 6.8 8.7V17c-2.3-.8-4-3-4-5.6 0-3.2 2.6-5.8 5.8-5.8 1.4 0 2.7.5 3.7 1.4L12 3z" fill="#3499CD" />
+        <path d="M12 21a9 9 0 0 0 9-9c0-4.2-2.9-7.7-6.8-8.7V7c2.3.8 4 3 4 5.6 0 3.2-2.6 5.8-5.8 5.8-1.4 0-2.7-.5-3.7-1.4L12 21z" fill="#F89939" />
+        <circle cx="9" cy="12" r="2.2" fill="#3499CD" />
+        <circle cx="15" cy="12" r="2.2" fill="#F89939" />
+      </svg>
+    );
+  if (key.includes("neural"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden>
+        <line x1="5" y1="7" x2="12" y2="4" stroke="#8B5CF6" strokeWidth={1.3} opacity="0.7" />
+        <line x1="5" y1="7" x2="12" y2="12" stroke="#8B5CF6" strokeWidth={1.3} opacity="0.7" />
+        <line x1="5" y1="17" x2="12" y2="12" stroke="#8B5CF6" strokeWidth={1.3} opacity="0.7" />
+        <line x1="5" y1="17" x2="12" y2="20" stroke="#8B5CF6" strokeWidth={1.3} opacity="0.7" />
+        <line x1="12" y1="4" x2="19" y2="12" stroke="#A78BFA" strokeWidth={1.3} opacity="0.7" />
+        <line x1="12" y1="12" x2="19" y2="12" stroke="#A78BFA" strokeWidth={1.3} opacity="0.7" />
+        <line x1="12" y1="20" x2="19" y2="12" stroke="#A78BFA" strokeWidth={1.3} opacity="0.7" />
+        <circle cx="5" cy="7" r="2.2" fill="#8B5CF6" />
+        <circle cx="5" cy="17" r="2.2" fill="#8B5CF6" />
+        <circle cx="12" cy="4" r="2.2" fill="#A78BFA" />
+        <circle cx="12" cy="12" r="2.2" fill="#A78BFA" />
+        <circle cx="12" cy="20" r="2.2" fill="#A78BFA" />
+        <circle cx="19" cy="12" r="2.4" fill="#C4B5FD" />
+      </svg>
+    );
+  if (key.includes("transfer"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <circle cx="6" cy="12" r="3.5" stroke="#3B82F6" strokeWidth={2} />
+        <circle cx="18" cy="12" r="3.5" stroke="#8B5CF6" strokeWidth={2} />
+        <path d="M9.5 9.5c1.5-1.5 3.5-1.5 5 0" stroke="#60A5FA" strokeWidth={1.8} />
+        <path d="M9.5 14.5c1.5 1.5 3.5 1.5 5 0" stroke="#A78BFA" strokeWidth={1.8} />
+        <path d="M12.5 7.5l2 2-2 2" stroke="#60A5FA" strokeWidth={1.8} />
+      </svg>
+    );
+  if (key.includes("forest") || key.includes("tree"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none" stroke="#10B981" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M8 4 4 10h2.5L4 15h8l-2.5-5H12L8 4z" fill="#10B981" fillOpacity="0.2" />
+        <path d="M8 15v4" strokeWidth={2} />
+        <path d="M16 8 13 13h1.8L13 17h6l-1.8-4H19l-3-5z" fill="#059669" fillOpacity="0.3" stroke="#059669" />
+        <path d="M16 17v3" stroke="#059669" strokeWidth={2} />
+      </svg>
+    );
+  if (key.includes("gradient") || key.includes("boost"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M3 19h18" stroke="currentColor" strokeWidth={1.5} opacity="0.3" />
+        <path d="M4 17l4-5 4 2 7-9" stroke="#F59E0B" strokeWidth={2.2} />
+        <path d="M15 5h4v4" stroke="#F59E0B" strokeWidth={2.2} />
+        <circle cx="8" cy="12" r="1.8" fill="#F59E0B" />
+        <circle cx="12" cy="14" r="1.8" fill="#F59E0B" />
+        <circle cx="19" cy="5" r="1.8" fill="#F59E0B" />
+      </svg>
+    );
+  if (key.includes("classification"))
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
+        <circle cx="16" cy="6" r="2" fill="#38BDF8" />
+        <circle cx="19" cy="9" r="2" fill="#38BDF8" />
+        <circle cx="14" cy="10" r="2" fill="#38BDF8" />
+        <rect x="4" y="14" width="3.5" height="3.5" rx="0.8" fill="#F43F5E" />
+        <rect x="8" y="16" width="3.5" height="3.5" rx="0.8" fill="#F43F5E" />
+        <rect x="6" y="10" width="3.5" height="3.5" rx="0.8" fill="#F43F5E" />
+        <path d="M4 4c4 5 7 9 16 16" stroke="var(--accent)" strokeWidth={1.8} strokeDasharray="2.5 2" strokeLinecap="round" />
+      </svg>
+    );
 
   /* fallback — neutral dot */
   return (
