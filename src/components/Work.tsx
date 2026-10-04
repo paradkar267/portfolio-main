@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   ArrowUpRight,
-  Calendar,
   CheckCircle2,
   Code2,
   Cpu,
@@ -361,19 +360,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                   </span>
                 ))}
               </div>
-            </div>
-
-            {/* Timeline */}
-            <div className="rounded-2xl border border-line bg-surface2 p-5">
-              <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted font-semibold">
-                <Calendar size={12} /> Timeline &amp; Status
-              </p>
-              <p className="font-xwide mt-2 text-xl font-extrabold text-ink">
-                {project.year}
-              </p>
-              <p className="mt-1 text-[11.5px] text-muted">
-                {project.live ? "Shipped live to production" : "Verified engineering build"}
-              </p>
             </div>
           </div>
         </div>
