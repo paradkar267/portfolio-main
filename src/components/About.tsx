@@ -88,10 +88,13 @@ export default function About() {
               </p>
             </Reveal>
 
-            <Reveal delay={0.26} className="mt-8 flex flex-wrap items-center gap-3">
+            <Reveal
+              delay={0.26}
+              className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+            >
               <button
                 onClick={() => scrollTo("#work")}
-                className="group flex items-center gap-2.5 rounded-lg bg-accent px-6 py-3.5 text-[13px] font-bold text-accent-ink transition-colors duration-300 hover:bg-accent-deep"
+                className="group flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-lg bg-accent px-6 py-3.5 text-[13px] font-bold text-accent-ink transition-colors duration-300 hover:bg-accent-deep"
               >
                 View My Projects
                 <ArrowUpRight
@@ -104,7 +107,7 @@ export default function About() {
                 target="_blank"
                 rel="noreferrer"
                 download="Yash_Paradkar_Resume.pdf"
-                className="group flex items-center gap-2.5 rounded-lg border border-line-strong px-6 py-3.5 text-[13px] font-bold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
+                className="group flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-lg border border-line-strong px-6 py-3.5 text-[13px] font-bold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
               >
                 Download Resume
                 <Download
