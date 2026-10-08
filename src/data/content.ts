@@ -127,7 +127,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Built with Next.js App Router and TypeScript. Chat completions are streamed from Google's Gemini 2.5 Flash API with token-level streaming for immediate perceived responsiveness. Customer inquiries, product catalog embeddings, and consultation histories are persisted in a serverless Neon PostgreSQL database via secure REST API routes.",
     stack: ["Next.js", "Gemini 2.5 Flash", "TypeScript", "Neon Postgres", "Tailwind CSS", "Vercel"],
-    image: "/images/project-jewelbot.jpg",
+    image: "/images/project-jewelbot.webp",
     live: "https://jewel-bota.vercel.app",
     github: "https://github.com/paradkar267/jewel-bot",
   },
@@ -151,7 +151,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Python and LangChain backend orchestrating transcription pipelines and text embedding. Vector chunks are indexed in a vector store for fast cosine-similarity retrieval. Grounded context is synthesized via LLMs with custom prompt templates that enforce source attribution with lesson IDs and minute:second timestamps.",
     stack: ["Python", "LangChain", "Vector Database", "FastAPI", "React", "TypeScript", "Tailwind CSS"],
-    image: "/images/project-courselens.jpg",
+    image: "/images/project-courselens.webp",
     github: "https://github.com/paradkar267/LLM-project",
   },
   {
@@ -174,7 +174,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Architected on Next.js with React Server Components for near-instant rendering. PostgreSQL manages template catalog metadata, analytics, and license validation. Dynamic iframe isolation ensures safe, responsive preview rendering of live templates.",
     stack: ["Next.js", "React", "PostgreSQL", "Tailwind CSS", "Framer Motion", "Vercel"],
-    image: "/images/bttemplate.png",
+    image: "/images/bttemplate.webp",
     live: "https://bt-templates.vercel.app",
   },
   {
@@ -197,7 +197,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Next.js SSR storefront connected to a Node.js/Express backend and MongoDB cluster. Images are optimized via modern WebP delivery pipelines. Secure payment session handling implemented with Razorpay API and verified signature webhooks.",
     stack: ["Next.js", "Node.js", "Express", "MongoDB", "Razorpay", "Tailwind CSS"],
-    image: "/images/rajwadi.png",
+    image: "/images/rajwadi.webp",
     live: "https://www.rajwadirajputiposhak.com",
   },
   {
@@ -220,7 +220,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "React frontend with Tailwind CSS and responsive design patterns. RESTful API powered by Node.js and Express connected to MongoDB for property schema and user analytics. Map interfaces integrated using Google Maps JavaScript API.",
     stack: ["React", "Node.js", "Express", "MongoDB", "Google Maps API", "Tailwind CSS"],
-    image: "/images/heyinvester.png",
+    image: "/images/heyinvester.webp",
     live: "https://www.heyinvestor.in",
   },
   {
@@ -243,7 +243,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Static site generation with Next.js and TypeScript, styled with Tailwind CSS. Optimized for strict web vitals and fast delivery across continents via CDN edge caching with comprehensive schema.org metadata for international search engines.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "SEO Best Practices"],
-    image: "/images/pankaj.png",
+    image: "/images/pankaj.webp",
     live: "https://www.pankajoverseasexports.com",
   },
   {
@@ -266,7 +266,7 @@ export const PROJECTS: Project[] = [
     architecture:
       "Built with React and Three.js / React Three Fiber using custom shaders and lightweight glTF 3D assets. Camera motions and page narrative sections are driven by GSAP ScrollTrigger for 60fps smooth hardware-accelerated animations.",
     stack: ["Three.js", "React", "GSAP ScrollTrigger", "WebGL", "Vite", "Tailwind CSS"],
-    image: "/images/newindia.png",
+    image: "/images/newindia.webp",
     live: "https://newindia-3d.vercel.app",
   },
 ];

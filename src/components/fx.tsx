@@ -45,19 +45,22 @@ export function SplitChars({
   const MTag = motion[Tag as "span"] as typeof motion.span;
 
   return (
-    <MTag ref={ref} className={`inline-block ${className}`} aria-label={text}>
-      {chars.map((c, i) => (
-        <span key={i} className="mask-line inline-block align-baseline" aria-hidden>
-          <motion.span
-            className={`inline-block ${charClass}`}
-            initial={{ y: "115%", rotate: 4 }}
-            animate={inView ? { y: "0%", rotate: 0 } : undefined}
-            transition={{ duration: 0.9, ease: EASE, delay: delay + i * stagger }}
-          >
-            {c === " " ? "\u00A0" : c}
-          </motion.span>
-        </span>
-      ))}
+    <MTag ref={ref} className={`inline-block ${className}`}>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true" className="inline-block">
+        {chars.map((c, i) => (
+          <span key={i} className="mask-line inline-block align-baseline">
+            <motion.span
+              className={`inline-block ${charClass}`}
+              initial={{ y: "115%", rotate: 4 }}
+              animate={inView ? { y: "0%", rotate: 0 } : undefined}
+              transition={{ duration: 0.9, ease: EASE, delay: delay + i * stagger }}
+            >
+              {c === " " ? "\u00A0" : c}
+            </motion.span>
+          </span>
+        ))}
+      </span>
     </MTag>
   );
 }
@@ -170,8 +173,9 @@ export function Scramble({
   }, [inView, text, speed, delay]);
 
   return (
-    <span ref={ref} className={className} aria-label={text}>
-      {out}
+    <span ref={ref} className={className}>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{out}</span>
     </span>
   );
 }

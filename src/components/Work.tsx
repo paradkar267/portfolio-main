@@ -44,6 +44,8 @@ function ProjectCard({
           alt={project.title}
           loading="lazy"
           decoding="async"
+          width={640}
+          height={400}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-75 transition-opacity duration-500 group-hover:opacity-90" />
@@ -211,6 +213,8 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             <img
               src={project.image}
               alt={project.title}
+              width={1280}
+              height={720}
               className="h-full w-full object-cover"
             />
           </div>

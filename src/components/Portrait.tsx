@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { EASE } from "./fx";
 
 export default function Portrait({
-  fallbackSrc = "/images/Clean%20natural%20skin%20portrait%20retouch.png",
+  fallbackSrc = "/images/portrait.webp",
   alt = "Yash Paradkar",
   ready = true,
   children,
@@ -20,13 +20,16 @@ export default function Portrait({
         initial={{ clipPath: "inset(100% 0 0 0)" }}
         animate={ready ? { clipPath: "inset(0% 0 0 0)" } : undefined}
         transition={{ duration: 1.2, ease: EASE, delay: 0.3 }}
+        style={{ willChange: "clip-path" }}
         className="group relative aspect-[3/4] w-full select-none overflow-hidden rounded-t-[999px] rounded-b-[28px] transition-shadow duration-300"
       >
-
         <img
           src={fallbackSrc}
           alt={alt}
+          fetchPriority="high"
           decoding="async"
+          width={380}
+          height={507}
           draggable={false}
           className="h-full w-full origin-center object-cover will-change-transform"
           style={{

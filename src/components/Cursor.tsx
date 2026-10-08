@@ -14,6 +14,10 @@ export default function Cursor() {
   const ringY = useSpring(y, { stiffness: 420, damping: 36, mass: 0.5 });
 
   useEffect(() => {
+    if (typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches) {
+      return;
+    }
+
     /* position: rAF-throttled, writes straight to motion values —
        no React state, so mousemove never triggers a re-render */
     let frame = 0;
