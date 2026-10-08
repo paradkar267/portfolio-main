@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { EASE } from "./fx";
 
 export default function Portrait({
-  fallbackSrc = "/images/portrait.png",
+  fallbackSrc = "/images/Clean%20natural%20skin%20portrait%20retouch.png",
   alt = "Yash Paradkar",
   ready = true,
   children,
