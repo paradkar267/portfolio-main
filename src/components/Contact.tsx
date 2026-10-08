@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { AlertCircle, ArrowUp, ArrowUpRight, Check, Copy, Loader2, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { EMAIL, SOCIALS } from "../data/content";
+import { verifyEmail } from "../utils/verifyEmail";
 import DottedName from "./DottedName";
 import { LineReveal, Magnetic, Reveal, SectionTag } from "./fx";
 import Marquee from "./Marquee";
@@ -12,52 +13,128 @@ function Field({
   type = "text",
   textarea = false,
   placeholder,
+  value,
+  onChange,
+  onBlur,
+  error,
+  suggestion,
+  onAcceptSuggestion,
+  disabled = false,
 }: {
   label: string;
   name: string;
   type?: string;
   textarea?: boolean;
   placeholder: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  error?: string;
+  suggestion?: string | null;
+  onAcceptSuggestion?: (suggestion: string) => void;
+  disabled?: boolean;
 }) {
   const [focus, setFocus] = useState(false);
+  const hasError = Boolean(error);
+
   return (
-    <label className="group block">
-      <span
-        className={`font-mono text-[10px] uppercase tracking-[0.28em] transition-colors ${
-          focus ? "text-accent" : "text-muted"
-        }`}
-      >
-        {label}
-      </span>
+    <div className="group block">
+      <div className="flex items-center justify-between">
+        <label
+          htmlFor={name}
+          className={`font-mono text-[10px] uppercase tracking-[0.28em] transition-colors cursor-pointer ${
+            hasError ? "text-rose-400 font-semibold" : focus ? "text-accent" : "text-muted"
+          }`}
+        >
+          {label}
+        </label>
+        {hasError && (
+          <span className="font-mono text-[10px] uppercase tracking-wider text-rose-400 font-semibold">
+            Invalid
+          </span>
+        )}
+      </div>
       {textarea ? (
         <textarea
+          id={name}
           name={name}
           required
           rows={4}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
           placeholder={placeholder}
           onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          className="bg-anim mt-2 w-full resize-none rounded-2xl border border-line bg-surface px-5 py-4 text-base text-ink outline-none transition-colors placeholder:text-muted/60 focus:border-accent sm:text-[14px]"
+          onBlur={(e) => {
+            setFocus(false);
+            onBlur?.(e);
+          }}
+          className={`bg-anim mt-2 w-full resize-none rounded-2xl border bg-surface px-5 py-4 text-base text-ink outline-none transition-colors placeholder:text-muted/60 sm:text-[14px] ${
+            hasError
+              ? "border-rose-500/80 focus:border-rose-500 bg-rose-500/[0.04]"
+              : "border-line focus:border-accent"
+          }`}
         />
       ) : (
         <input
+          id={name}
           name={name}
           type={type}
           required
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
           placeholder={placeholder}
           onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          className="bg-anim mt-2 w-full rounded-2xl border border-line bg-surface px-5 py-4 text-base text-ink outline-none transition-colors placeholder:text-muted/60 focus:border-accent sm:text-[14px]"
+          onBlur={(e) => {
+            setFocus(false);
+            onBlur?.(e);
+          }}
+          className={`bg-anim mt-2 w-full rounded-2xl border bg-surface px-5 py-4 text-base text-ink outline-none transition-colors placeholder:text-muted/60 sm:text-[14px] ${
+            hasError
+              ? "border-rose-500/80 focus:border-rose-500 bg-rose-500/[0.04]"
+              : "border-line focus:border-accent"
+          }`}
         />
       )}
-    </label>
+      {error && (
+        <motion.p
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 flex items-center gap-1.5 text-[12px] text-rose-400 leading-tight"
+        >
+          <AlertCircle size={13} className="shrink-0" />
+          <span>{error}</span>
+        </motion.p>
+      )}
+      {suggestion && onAcceptSuggestion && (
+        <motion.p
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 flex flex-wrap items-center gap-1.5 text-[12px] text-muted"
+        >
+          <span>Did you mean</span>
+          <button
+            type="button"
+            onClick={() => onAcceptSuggestion(suggestion)}
+            className="cursor-pointer font-bold text-accent underline underline-offset-2 transition-colors hover:text-ink"
+          >
+            {suggestion}
+          </button>
+          <span>?</span>
+        </motion.p>
+      )}
+    </div>
   );
 }
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "needs_activation" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "verifying" | "sending" | "sent" | "needs_activation" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
 
   const copyEmail = async () => {
     try {
@@ -73,14 +150,38 @@ export default function Contact() {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const message = formData.get("message") as string;
+    const name = (formData.get("name") as string)?.trim();
+    const submittedEmail = (formData.get("email") as string || email)?.trim();
+    const message = (formData.get("message") as string)?.trim();
 
-    if (!name || !email || !message) return;
+    if (!name || !submittedEmail || !message) return;
 
-    setStatus("sending");
+    if (name.length < 2) {
+      setStatus("error");
+      setErrorMessage("Please enter your name.");
+      return;
+    }
+
+    if (message.length < 5) {
+      setStatus("error");
+      setErrorMessage("Please provide a brief description of your project or idea.");
+      return;
+    }
+
+    setStatus("verifying");
     setErrorMessage("");
+
+    const verification = await verifyEmail(submittedEmail);
+    if (!verification.valid) {
+      setStatus("idle");
+      setEmailError(verification.error || "This email address does not exist or is invalid.");
+      setEmailSuggestion(verification.suggestion || null);
+      return;
+    }
+
+    setEmailError("");
+    setEmailSuggestion(null);
+    setStatus("sending");
 
     try {
       const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
@@ -91,9 +192,9 @@ export default function Contact() {
         },
         body: JSON.stringify({
           name,
-          email,
+          email: submittedEmail,
           message,
-          _subject: `Portfolio Message from ${name} (${email})`,
+          _subject: `Portfolio Message from ${name} (${submittedEmail})`,
           _captcha: "false",
           _template: "table",
         }),
@@ -104,6 +205,9 @@ export default function Contact() {
       if (res.ok && (data?.success === "true" || data?.success === true)) {
         setStatus("sent");
         form.reset();
+        setEmail("");
+        setEmailError("");
+        setEmailSuggestion(null);
         setTimeout(() => setStatus("idle"), 5000);
       } else if (
         data?.message &&
@@ -112,6 +216,7 @@ export default function Contact() {
       ) {
         setStatus("needs_activation");
         form.reset();
+        setEmail("");
       } else {
         setStatus("error");
         setErrorMessage(data?.message || "Could not send. Please email directly.");
@@ -243,13 +348,54 @@ export default function Contact() {
               </span>
             </div>
             <div className="mt-7 flex flex-col gap-5">
-              <Field label="Your name" name="name" placeholder="Jane Cooper" />
-              <Field label="Email address" name="email" type="email" placeholder="jane@studio.com" />
+              <Field
+                label="Your name"
+                name="name"
+                placeholder="Jane Cooper"
+                disabled={status === "verifying" || status === "sending"}
+              />
+              <Field
+                label="Email address"
+                name="email"
+                type="email"
+                placeholder="jane@studio.com"
+                value={email}
+                disabled={status === "verifying" || status === "sending"}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailError) setEmailError("");
+                  if (emailSuggestion) setEmailSuggestion(null);
+                }}
+                onBlur={async () => {
+                  const trimmed = email.trim();
+                  if (!trimmed) return;
+                  if (!trimmed.includes("@")) {
+                    setEmailError("Please enter a valid email address with '@'.");
+                    return;
+                  }
+                  const res = await verifyEmail(trimmed);
+                  if (!res.valid) {
+                    setEmailError(res.error || "Please enter a valid, active email address.");
+                    setEmailSuggestion(res.suggestion || null);
+                  } else {
+                    setEmailError("");
+                    setEmailSuggestion(null);
+                  }
+                }}
+                error={emailError}
+                suggestion={emailSuggestion}
+                onAcceptSuggestion={(s) => {
+                  setEmail(s);
+                  setEmailError("");
+                  setEmailSuggestion(null);
+                }}
+              />
               <Field
                 label="Tell me about the idea"
                 name="message"
                 textarea
                 placeholder="Timeline – scope – the exciting part…"
+                disabled={status === "verifying" || status === "sending"}
               />
               {status === "needs_activation" && (
                 <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4 text-xs text-amber-200">
@@ -282,16 +428,20 @@ export default function Contact() {
                 <button
                   type="submit"
                   data-hover
-                  disabled={status === "sending"}
+                  disabled={status === "verifying" || status === "sending"}
                   className={`flex w-full items-center justify-center gap-3 rounded-full py-4.5 text-[12px] font-bold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed ${
                     status === "sent"
                       ? "bg-emerald-600 text-white"
                       : "bg-ink text-bg hover:bg-accent hover:text-accent-ink"
                   }`}
                 >
-                  {status === "sending" ? (
+                  {status === "verifying" ? (
                     <>
-                      <Loader2 size={16} className="animate-spin" /> Sending Message...
+                      <Loader2 size={16} className="animate-spin text-accent" /> Verifying email...
+                    </>
+                  ) : status === "sending" ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" /> Sending message...
                     </>
                   ) : status === "sent" ? (
                     <>
