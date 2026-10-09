@@ -9,54 +9,54 @@
 
   <!-- Main Portfolio Homepage -->
   <url>
-    <loc>https://yashparadkar.in/</loc>
+    <loc>https://www.yashparadkar.in/</loc>
     <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
 
     <!-- Key Visual Assets & Project Previews for Google Image Search -->
     <image:image>
-      <image:loc>https://yashparadkar.in/images/portrait.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/portrait.webp</image:loc>
       <image:title>Yash Paradkar — Full-Stack Developer &amp; AI Engineer</image:title>
       <image:caption>Official portrait of Yash Paradkar</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/og-image.jpg</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/og-image.jpg</image:loc>
       <image:title>Yash Paradkar Portfolio Social Preview Banner</image:title>
       <image:caption>Full-Stack Engineering &amp; Applied AI Portfolio</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/project-jewelbot.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/project-jewelbot.webp</image:loc>
       <image:title>Jewel Bot — AI Jewellery Assistant</image:title>
       <image:caption>Conversational AI sales and discovery assistant powered by Gemini 2.5 Flash</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/project-courselens.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/project-courselens.webp</image:loc>
       <image:title>AI RAG Video Teaching Assistant</image:title>
       <image:caption>Retrieval-Augmented Generation (RAG) assistant transforming video lecture series into searchable knowledge</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/bttemplate.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/bttemplate.webp</image:loc>
       <image:title>BT Templates — Website Template Marketplace</image:title>
       <image:caption>Production-ready website template marketplace with live responsive preview sandboxes</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/rajwadi.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/rajwadi.webp</image:loc>
       <image:title>Rajwadi Rajputi Poshak — Luxury E-Commerce</image:title>
       <image:caption>Luxury ethnic-wear e-commerce storefront with Razorpay payment integration</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/heyinvester.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/heyinvester.webp</image:loc>
       <image:title>Hey Investor — Real Estate Discovery Platform</image:title>
       <image:caption>Nagpur real estate discovery platform with verified listings and interactive maps</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/pankaj.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/pankaj.webp</image:loc>
       <image:title>Pankaj Overseas Exports — Global Trade Portal</image:title>
       <image:caption>Global import-export corporate presence featuring comprehensive product catalogs</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://yashparadkar.in/images/newindia.webp</image:loc>
+      <image:loc>https://www.yashparadkar.in/images/newindia.webp</image:loc>
       <image:title>United Logistics — 3D WebGL Experience</image:title>
       <image:caption>Immersive 3D logistics storytelling experience with WebGL fleet rendering</image:caption>
     </image:image>
@@ -64,7 +64,7 @@
 
   <!-- Downloadable Resume PDF -->
   <url>
-    <loc>https://yashparadkar.in/Yash_Paradkar_Resume.pdf</loc>
+    <loc>https://www.yashparadkar.in/Yash_Paradkar_Resume.pdf</loc>
     <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

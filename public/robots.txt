@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://yashparadkar.in
+Host: https://www.yashparadkar.in
 
 # Sitemaps
-Sitemap: https://yashparadkar.in/sitemap.xml
+Sitemap: https://www.yashparadkar.in/sitemap.xml
