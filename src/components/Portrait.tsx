@@ -37,7 +37,7 @@ export default function Portrait({
             objectPosition: "center top",
           }}
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/45 via-black/15 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-bg/60 via-bg/20 to-transparent dark:from-black/50 dark:via-black/15" />
 
         {children}
       </motion.div>

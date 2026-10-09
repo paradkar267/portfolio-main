@@ -1,0 +1,22 @@
+{
+  "name": "Yash Paradkar — Full-Stack Developer & AI Engineer",
+  "short_name": "Yash Paradkar",
+  "description": "Portfolio of Yash Paradkar — Full-Stack Developer & AI Engineer crafting thoughtful, performant digital experiences.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#d94e1f",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

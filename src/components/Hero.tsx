@@ -67,13 +67,13 @@ function NameWord({
 
 function NameBand({ ready }: { ready: boolean }) {
   return (
-    <h2
+    <h1
       aria-label="Yash Paradkar"
       className="flex w-full flex-wrap items-baseline justify-center gap-x-[0.28em] text-center font-xwide text-[12.5vw] font-black uppercase leading-[0.92] tracking-[-0.02em] text-ink sm:text-[10.5vw] lg:whitespace-nowrap lg:text-[8.4vw]"
     >
       <NameWord word="YASH" ready={ready} />
       <NameWord word="PARADKAR" ready={ready} startIndex={4} delay={0.12} />
-    </h2>
+    </h1>
   );
 }
 
@@ -117,13 +117,13 @@ export default function Hero() {
         <div className="relative mt-6 sm:mt-8 grid gap-8 sm:gap-10 lg:mt-6 lg:grid-cols-[1.05fr_0.85fr_1fr] lg:gap-8 xl:gap-12">
           {/* ---------- LEFT: statement ---------- */}
           <div className="order-2 flex flex-col items-center sm:items-start text-center sm:text-left lg:order-1">
-            <h1 className="font-headline text-[8.5vw] font-semibold leading-[1.08] tracking-[-0.01em] sm:text-[6.5vw] lg:text-[2.9vw]">
+            <h2 className="font-headline text-[8.5vw] font-semibold leading-[1.08] tracking-[-0.01em] sm:text-[6.5vw] lg:text-[2.9vw]">
               <LineReveal delay={0.5}>Thoughtful design.</LineReveal>
               <LineReveal delay={0.6}>Purposeful code.</LineReveal>
               <LineReveal delay={0.7}>
                 <span className="text-accent">Real experiences.</span>
               </LineReveal>
-            </h1>
+            </h2>
 
             <Reveal delay={0.85} className="mt-5 sm:mt-6">
               <p className="max-w-md text-[14.5px] sm:text-[15px] leading-[1.8] text-ink2">

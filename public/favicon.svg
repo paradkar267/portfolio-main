@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="ypGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7d4d" />
+      <stop offset="100%" stop-color="#d94e1f" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#0d0f12" />
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" stroke="url(#ypGrad)" stroke-opacity="0.35" stroke-width="1.5" />
+  <!-- Monogram YP -->
+  <g filter="url(#glow)">
+    <!-- Y -->
+    <path d="M16 18 L25 32 L25 46" stroke="url(#ypGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M34 18 L25 32" stroke="url(#ypGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- P -->
+    <path d="M37 46 L37 20 L46 20 C50 20 52.5 22.5 52.5 26.5 C52.5 30.5 50 33 46 33 L37 33" stroke="url(#ypGrad)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  </g>
+</svg>
